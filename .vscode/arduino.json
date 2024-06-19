@@ -1,0 +1,5 @@
+{
+    "configuration": "flash=8388608_0,freq=120,opt=Small,rtti=Disabled,stackprotect=Disabled,exceptions=Disabled,dbgport=Disabled,dbglvl=None,usbstack=tinyusb,ipbtstack=ipv4only,boot2=boot2_w25q080_2_padded_checksum,uploadmethod=default",
+    "board": "rp2040:rp2040:adafruit_feather_usb_host",
+    "sketch": "rp2040_usb_complete\\rp2040_usb_complete.ino"
+}
