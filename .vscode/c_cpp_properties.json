@@ -17,13 +17,13 @@
             ],
             "intelliSenseMode": "gcc-x64",
             "includePath": [
-                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.2\\libraries\\Adafruit_TinyUSB_Arduino\\src\\arduino",
-                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.2\\include",
-                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.2\\cores\\rp2040",
-                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.2\\variants\\adafruit_feather_usb_host",
+                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.0\\libraries\\Adafruit_TinyUSB_Arduino\\src\\arduino",
+                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.0\\include",
+                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.0\\cores\\rp2040",
+                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.0\\variants\\adafruit_feather_usb_host",
+                "C:\\Users\\han\\Documents\\Arduino\\libraries\\Pico_PIO_USB\\src",
                 "C:\\Users\\han\\Documents\\Arduino\\libraries\\Adafruit_TinyUSB_Library\\src",
-                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.2\\libraries\\SPI\\src",
-                "C:\\Users\\han\\Documents\\Arduino\\libraries\\MIDI_Library\\src",
+                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.0\\libraries\\SPI\\src",
                 "C:\\Users\\han\\Documents\\Arduino\\libraries\\usb_midi_host",
                 "c:\\users\\han\\appdata\\local\\arduino15\\packages\\rp2040\\tools\\pqt-gcc\\2.2.0-d04e724\\arm-none-eabi\\include\\c++\\12.3.0",
                 "c:\\users\\han\\appdata\\local\\arduino15\\packages\\rp2040\\tools\\pqt-gcc\\2.2.0-d04e724\\arm-none-eabi\\include\\c++\\12.3.0\\arm-none-eabi\\thumb",
@@ -33,7 +33,7 @@
                 "c:\\users\\han\\appdata\\local\\arduino15\\packages\\rp2040\\tools\\pqt-gcc\\2.2.0-d04e724\\arm-none-eabi\\include"
             ],
             "forcedInclude": [
-                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.2\\cores\\rp2040\\Arduino.h"
+                "C:\\Users\\han\\AppData\\Local\\Arduino15\\packages\\rp2040\\hardware\\rp2040\\3.9.0\\cores\\rp2040\\Arduino.h"
             ],
             "cStandard": "c11",
             "cppStandard": "c++17",
@@ -61,6 +61,11 @@
                 "ARDUINO_ADAFRUIT_FEATHER_RP2040_USB_HOST",
                 "BOARD_NAME=\"ADAFRUIT_FEATHER_RP2040_USB_HOST\"",
                 "ARDUINO_ARCH_RP2040",
+                "DEBUG_RP2040_PORT=Serial",
+                "DEBUG_RP2040_WIRE",
+                "DEBUG_RP2040_SPI",
+                "DEBUG_RP2040_CORE",
+                "DEBUG_RP2040_BLUETOOTH",
                 "WIFICC=CYW43_COUNTRY_WORLDWIDE",
                 "__DBL_MIN_EXP__=(-1021)",
                 "__HQ_FBIT__=15",

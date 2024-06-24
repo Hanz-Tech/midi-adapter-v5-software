@@ -26,64 +26,10 @@
  */
 #include "usb_host.h"
 
-#define HOST_PIN_DP   16   // Pin used as D+ for host, D- = D+ + 1
-
-
-
 USB_HOST::USB_HOST(){
   midi_dev_addr = 0;
 }
 
-// Invoked when device is mounted (configured)
-void USB_HOST::tuh_mount_cb (uint8_t daddr)
-{
-  Serial.printf("Device attached, address = %d\r\n", daddr);
-
-  // Get Device Descriptor
-  tuh_descriptor_get_device(daddr, &desc_device, 18, print_device_descriptor, 0);
-}
-
-/// Invoked when device is unmounted (bus reset/unplugged)
-void USB_HOST::tuh_umount_cb(uint8_t daddr)
-{
-  Serial.printf("Device removed, address = %d\r\n", daddr);
-}
-
-
-//--------------------------------------------------------------------+
-// TinyUSB Callbacks
-//--------------------------------------------------------------------+
-
-// Invoked when device with hid interface is mounted
-// Report descriptor is also available for use. tuh_hid_parse_report_descriptor()
-// can be used to parse common/simple enough descriptor.
-// Note: if report descriptor length > CFG_TUH_ENUMERATION_BUFSIZE, it will be skipped
-// therefore report_desc = NULL, desc_len = 0
-void USB_HOST::tuh_midi_mount_cb(uint8_t dev_addr, uint8_t in_ep, uint8_t out_ep, uint8_t num_cables_rx, uint16_t num_cables_tx)
-{
-  Serial.printf("MIDI device address = %u, IN endpoint %u has %u cables, OUT endpoint %u has %u cables\r\n",
-      dev_addr, in_ep & 0xf, num_cables_rx, out_ep & 0xf, num_cables_tx);
-
-  if (midi_dev_addr == 0) {
-    // then no MIDI device is currently connected
-    midi_dev_addr = dev_addr;
-  }
-  else {
-    Serial.printf("A different USB MIDI Device is already connected.\r\nOnly one device at a time is supported in this program\r\nDevice is disabled\r\n");
-  }
-}
-
-// Invoked when device with hid interface is un-mounted
-void USB_HOST::tuh_midi_umount_cb(uint8_t dev_addr, uint8_t instance)
-{
-  if (dev_addr == midi_dev_addr) {
-    midi_dev_addr = 0;
-    Serial.printf("MIDI device address = %d, instance = %d is unmounted\r\n", dev_addr, instance);
-  }
-  else {
-    Serial.printf("Unused MIDI device address = %d, instance = %d is unmounted\r\n", dev_addr, instance);
-  }
-}
 
 
 void USB_HOST::tuh_midi_rx_cb(uint8_t dev_addr, uint32_t num_packets, MidiDataProcessor dataProcessor) {
@@ -92,7 +38,7 @@ void USB_HOST::tuh_midi_rx_cb(uint8_t dev_addr, uint32_t num_packets, MidiDataPr
       uint8_t cable_num;
       uint8_t buffer[4];
       while (1) {
-        uint32_t bytes_read = tuh_midi_packet_read(dev_addr, &cable_num, buffer, sizeof(buffer));
+        uint32_t bytes_read = tuh_midi_packet_read(dev_addr, buffer);
         if (bytes_read == 0)
           return;
 

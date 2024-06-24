@@ -29,32 +29,34 @@
 #ifndef USB_HOST_H
 #define USB_HOST_H
 
-#include "Adafruit_TinyUSB.h"
+#include <Adafruit_TinyUSB.h>
 #include "pio_usb.h"
 
+#define LANGUAGE_ID 0x0409  // English
+
+
 // Add USB MIDI Host support to Adafruit_TinyUSB
-#include "usb_midi_host.h"
+#include <usb_midi_host.h>
 
 typedef void (*MidiDataProcessor)(uint8_t *, uint32_t);
 
 class USB_HOST {
   private:
-   uint8_t midi_dev_addr;
-   uint32_t num_packets;
+    uint8_t midi_dev_addr;
+    uint32_t num_packets;
     // holding device descriptor
-    tusb_desc_device_t desc_device;
-    void tuh_midi_umount_cb(uint8_t dev_addr, uint8_t instance);
-    void tuh_midi_mount_cb(uint8_t dev_addr, uint8_t in_ep, uint8_t out_ep, uint8_t num_cables_rx, uint16_t num_cables_tx);
-    void tuh_mount_cb (uint8_t daddr);
-    void tuh_umount_cb(uint8_t daddr);
+    // void tuh_midi_umount_cb(uint8_t dev_addr, uint8_t instance);
+    // void tuh_midi_mount_cb(uint8_t dev_addr, uint8_t in_ep, uint8_t out_ep, uint8_t num_cables_rx, uint16_t num_cables_tx);
+    // void tuh_mount_cb (uint8_t daddr);
+    // void tuh_umount_cb(uint8_t daddr);
 
   public:
    USB_HOST();
    void tuh_midi_rx_cb(uint8_t dev_addr, uint32_t num_packets, MidiDataProcessor dataProcessor);
-   // USB Host object
-   Adafruit_USBH_Host usbh_instance;
-   uint8_t get_midi_dev_addr() { return midi_dev_addr};
-   uint8_t get_num_packets() { return num_packets};
+   
+   uint8_t get_midi_dev_addr() { return midi_dev_addr;}
+   void set_midi_dev_addr(uint8_t addr) { midi_dev_addr = addr; }
+   uint8_t get_num_packets() { return num_packets;}
 };
 
 
