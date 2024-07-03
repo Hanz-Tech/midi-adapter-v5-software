@@ -36,17 +36,6 @@ tusb_desc_device_t desc_device;
 // holding the device address of the MIDI device
 uint8_t midi_dev_addr = 0;
 
-
-int log_printf(const char * format, ...)
-{
-  char outstr[256];
-  va_list va;
-  va_start(va, format);
-  int ret = vsprintf(outstr, format, va);
-  // Uncomment the next line to send the debug log to the Serial1 output
-  return Serial.print(outstr);
-}
-
 // the setup function runs once when you press reset or power the board
 void setup()
 {
