@@ -21,7 +21,7 @@ byte leds = 0;         // Variable to hold the pattern of which LEDs are current
 
 const int NUM_MIDI_NOTES = 8; // Define the number of MIDI notes
 byte midiNotes[NUM_MIDI_NOTES] = {68, 69, 70, 71,72,73,74,75}; // Define the MIDI notes
-byte buttonNumbers[NUM_MIDI_NOTES] = {1, 2, 3, 4,5,6,7,8}; // Define the corresponding button numbers
+byte buttonNumbers[NUM_MIDI_NOTES] = {0, 1, 2, 3,4,5,6,7}; // Define the corresponding button numbers
 
 
 void process_midi_data(uint8_t *data, uint32_t length);
@@ -38,10 +38,22 @@ EZ_USB_MIDI_HOST<MidiHostSettingsDefault>& midiHost = myMidiHost; // Initialize 
 
 void usbh_onNoteOffHandle(byte channel, byte note, byte velocity){
     Serial.printf("C%u: Note off#%u v=%u\r\n", channel, note, velocity);
+    int buttonNumber = getButtonNumber(note);
+    if(buttonNumber >= 0){
+      bitSet(leds, buttonNumber);
+      Serial.println(leds);
+      updateShiftRegister();
+    }
 }
 
 void usbh_onNoteOnHandle(byte channel, byte note, byte velocity){
     Serial.printf("C%u: Note on#%u v=%u\r\n", channel, note, velocity);
+    int buttonNumber = getButtonNumber(note);
+    if(buttonNumber >= 0){
+      bitClear(leds, buttonNumber);
+      Serial.println(leds);
+      updateShiftRegister();
+  }
 }
 
 void usbh_onPolyphonicAftertouchHandle(byte channel, byte note, byte amount){
@@ -125,7 +137,7 @@ void setup() {
   // wait until device mounted
   while( !TinyUSBDevice.mounted() ) delay(1);
 
-  leds = 0;        // Initially turns all the LEDs off, by giving the variable 'leds' the value 0
+  leds = 0b11111111;        // Initially turns all the LEDs off, by giving the variable 'leds' the value 0
   updateShiftRegister();
   Serial.println("Ready");
 
